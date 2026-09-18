@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    name: Rust
+    runs-on: rust
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        run: |
+          rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+          rustup default stable
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: Run clippy
+        run: cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: Run tests
+        run: cargo test --all-features
+
+      - name: Validate the SolverForge model
+        run: |
+          if command -v solverforge >/dev/null 2>&1; then
+            solverforge check
+          else
+            echo "solverforge CLI is not on this runner; skipping model check"
+          fi
+
+      - name: Check browser script syntax
+        run: |
+          if command -v node >/dev/null 2>&1; then
+            node --check static/app.js
+          else
+            echo "node is not on this runner; skipping static/app.js syntax check"
+          fi
+
+  python:
+    name: Python tools
+    runs-on: python
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install tooling
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install typesafe-sdk pytest
+
+      - name: Run preprocessing tests
+        run: python3 -m pytest
