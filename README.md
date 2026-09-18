@@ -1,73 +1,89 @@
-# jev-team-calendar
+# Jev Team Calendar
 
-A SolverForge constraint optimization project (scaffold: `neutral web scaffold`).
+A SolverForge web application that discovers a project team from a shared directory of resumes.
 
-## Versioning
+```text
+input/resumes/* + input/projects/<project>/tasks.json
+                         |
+                         v
+              TypeSafe Jev preprocessing
+                         |
+                         v
+generated/projects/<project>/jev_candidates.json
+                         |
+                         v
+       SolverForge assignment and scheduling
+```
 
-- CLI version used to scaffold this project: `3.1.0`
-- SolverForge runtime target for this scaffold: `solverforge 0.19.5`
-- SolverForge UI target for this scaffold: `solverforge-ui 0.9.0`
-- SolverForge maps target for this scaffold: `solverforge-maps 2.1.4`
-- Runtime dependency currently wired into `Cargo.toml`: `crates.io: solverforge 0.19.5`
-- Frontend UI dependency currently wired into `Cargo.toml`: `crates.io: solverforge-ui 0.9.0`
-- Maps dependency currently wired into `Cargo.toml`: `crates.io: solverforge-maps 2.1.4`
-- Scaffold shell: `web`
+Jev evaluates resume evidence only against the selected project's required skill universe. It does not assign tasks, choose times, score plans, select moves, or run during a solve. SolverForge receives thresholded capability facts and owns all combinatorial decisions.
 
-This project was scaffolded by `solverforge-cli`, and it currently targets `SolverForge crate target 0.19.5` through the configured crate dependency targets.
-
-## Quick Start
+## Run
 
 ```bash
-# Start the solver server
 solverforge server
-
-# Or run directly
-cargo run --release
 ```
 
-## Development
+Open <http://127.0.0.1:7860>. Select a project, use **Analyze resumes for this project** to rebuild its capability facts, then use **Solve**.
+
+The application invokes `uv` itself. `uv` creates and maintains the ignored project-local `.venv`; users do not activate an environment or install the SDK manually. `TYPESAFE_API_KEY` is read from the process environment or the ignored local `.env` file.
+
+Direct API operation:
 
 ```bash
-# Add a new constraint
-solverforge generate constraint my_rule --unary --hard
-
-# Add a problem fact
-solverforge generate fact resource --field category:String --field load:i32
-
-# Add a domain entity
-solverforge generate entity task --field label:String --field priority:i32
-
-# Add a scalar planning variable
-solverforge generate variable resource_idx --entity Task --kind scalar --range resources --allows-unassigned
-
-# Or add a scalar over a non-negative half-open integer range
-# solverforge generate variable hour --entity Task --kind scalar --countable-range 0..24
-
-# Or add scalar hook metadata when your domain owns the hook functions
-# solverforge generate variable resource_idx --entity Task --kind scalar --range resources --candidate-values resource_candidates
-
-# Add an ordered list variable with optional current SolverForge metadata
-# solverforge generate variable visit_order --entity Route --kind list --elements visits --domain cvrp
-
-# Enable bounded candidate-pull diagnostics when needed
-# solverforge config set candidate_trace.max_entries 100000
-
-# Remove a resource
-solverforge destroy constraint my_rule
+curl -X POST http://127.0.0.1:7860/projects/platform-reliability/ingest
+curl -X POST http://127.0.0.1:7860/projects/product-launch/ingest
 ```
 
-## Project Structure
+`make ingest` remains a convenience for headless preprocessing of the default project, not the primary application workflow.
 
-| Directory | Purpose |
-|-----------|--------|
-| `src/domain/` | Planning entities, facts, and solution struct |
-| `src/constraints/` | Constraint definitions (scored by the solver) |
-| `src/solver/` | Solver service and configuration |
-| `src/api/` | HTTP routes and DTOs |
-| `src/data/` | Data loading and generation |
-| `solverforge.app.toml` | Scaffolded app/domain contract |
-| `solver.toml` | Solver configuration (termination, phases) |
+## Inputs
 
-## Runtime Diagnostics
+- `input/resumes/`: shared talent pool; `.md`, `.txt`, and `.pdf` are supported.
+- `input/projects/platform-reliability/tasks.json`: infrastructure project and skill universe.
+- `input/projects/product-launch/tasks.json`: product-launch project and distinct skill universe.
+- `fixtures/projects/*/jev_candidates.json`: checked-in deterministic, zero-network test/demo artifacts.
+- `generated/projects/*/jev_candidates.json`: live Jev output, intentionally ignored by Git.
 
-Status, snapshot, and SSE payloads expose the complete compact SolverForge telemetry surface. Candidate pulls remain separate from ordinary control-plane traffic. After enabling `candidate_trace.max_entries`, use `GET /jobs/{id}/telemetry` for the atomically retained bounded trace and `POST /jobs/qualified` for externally attested qualified trace jobs.
+PDF text extraction uses `pdftotext -layout`. Each resume produces one TypeSafe `system_one` call containing one independent Noul per distinct project skill. Noul's `.noul` value is the probability of “yes”; there is no separate Noul confidence field. `JEV_SKILL_THRESHOLD` defaults to `0.80`.
+
+## SolverForge Model
+
+- Fact: `Candidate` with resume source, project-qualified skills, raw probabilities in integer millionths, and explicit 90-slot availability.
+- Entity: `Task` with required skills, duration, and permitted time window.
+- Scalar variables: `Task.candidate_idx` and `Task.start_slot` (`0..90`).
+- Score: `HardSoftScore`.
+
+Hard constraints:
+
+- complete candidate assignment;
+- complete start-time assignment;
+- every required skill present on the assigned candidate;
+- no overlapping tasks for one candidate;
+- task fits its time window and a single workday;
+- every occupied slot is available for the candidate.
+
+Soft constraints:
+
+- earlier aggregate completion;
+- fewer same-day idle gaps;
+- balanced assigned duration.
+
+## Verification
+
+```bash
+solverforge info
+solverforge check
+solverforge test
+solverforge routes
+uv run pytest
+node --check static/app.js
+```
+
+The web shell retains the standard `/jobs` lifecycle and `solverforge-ui` controls, snapshots, SSE updates, score analysis, and raw Data view.
+
+## Versions
+
+- `solverforge-cli 3.1.0`
+- `solverforge 0.19.5`
+- `solverforge-ui 0.9.0`
+- official `typesafe-sdk`, resolved in `uv.lock`
