@@ -155,7 +155,9 @@ impl PlanDto {
         let mut fields = self.fields.clone();
         let _ = &self.score;
         fields.insert("score".to_string(), Value::Null);
-        serde_json::from_value(Value::Object(fields))
+        let mut plan: Plan = serde_json::from_value(Value::Object(fields))?;
+        plan.normalize();
+        Ok(plan)
     }
 }
 

@@ -1,0 +1,145 @@
+[
+  {
+    "id": "postgres-migration",
+    "title": "Migrate PostgreSQL production cluster",
+    "description": "Move the production PostgreSQL cluster with minimal downtime.",
+    "required_skills": [
+      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
+      {"id": "database_migration", "description": "Experience planning and executing production database migrations"}
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-22T18:00:00"
+  },
+  {
+    "id": "cluster-upgrade",
+    "title": "Upgrade the Kubernetes control plane",
+    "description": "Upgrade the production control plane and validate service recovery.",
+    "required_skills": [
+      {"id": "kubernetes", "description": "Production Kubernetes administration"},
+      {"id": "incident_response", "description": "Hands-on production incident response"}
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-21T17:00:00"
+  },
+  {
+    "id": "frontend-accessibility",
+    "title": "Repair calendar accessibility",
+    "description": "Implement keyboard navigation and accessible timeline semantics.",
+    "required_skills": [
+      {"id": "react", "description": "Professional React application development"},
+      {"id": "typescript", "description": "Production TypeScript development"}
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T10:00:00",
+    "latest_end": "2026-09-22T18:00:00"
+  },
+  {
+    "id": "etl-backfill",
+    "title": "Backfill warehouse events",
+    "description": "Build and operate a resumable event backfill into the warehouse.",
+    "required_skills": [
+      {"id": "python", "description": "Production Python engineering"},
+      {"id": "data_pipeline", "description": "Building and operating production data pipelines"}
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-23T18:00:00"
+  },
+  {
+    "id": "security-review",
+    "title": "Review infrastructure boundary",
+    "description": "Threat-model the deployment boundary and close high-risk findings.",
+    "required_skills": [
+      {"id": "security_review", "description": "Practical application or infrastructure security review"},
+      {"id": "terraform", "description": "Production infrastructure as code with Terraform"}
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-22T09:00:00",
+    "latest_end": "2026-09-23T15:00:00"
+  },
+  {
+    "id": "observability-rollout",
+    "title": "Roll out cluster telemetry",
+    "description": "Deploy metrics and alerts for cluster saturation and control-plane health.",
+    "required_skills": [
+      {"id": "observability", "description": "Production metrics, logging, tracing, and alerting"},
+      {"id": "kubernetes", "description": "Production Kubernetes administration"}
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T13:00:00",
+    "latest_end": "2026-09-22T18:00:00"
+  },
+  {
+    "id": "failover-drill",
+    "title": "Run database failover drill",
+    "description": "Execute and document a production-like PostgreSQL failover exercise.",
+    "required_skills": [
+      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
+      {"id": "incident_response", "description": "Hands-on production incident response"}
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T13:00:00",
+    "latest_end": "2026-09-22T12:00:00"
+  },
+  {
+    "id": "infra-provisioning",
+    "title": "Provision staging cluster",
+    "description": "Create the staging cluster from reviewed infrastructure modules.",
+    "required_skills": [
+      {"id": "terraform", "description": "Production infrastructure as code with Terraform"},
+      {"id": "kubernetes", "description": "Production Kubernetes administration"}
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-23T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "dashboard-repair",
+    "title": "Repair operations dashboard",
+    "description": "Correct stale frontend state and add regression coverage.",
+    "required_skills": [
+      {"id": "react", "description": "Professional React application development"},
+      {"id": "typescript", "description": "Production TypeScript development"}
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-22T09:00:00",
+    "latest_end": "2026-09-23T18:00:00"
+  },
+  {
+    "id": "release-automation",
+    "title": "Automate release verification",
+    "description": "Build deterministic release checks and artifact validation.",
+    "required_skills": [
+      {"id": "python", "description": "Production Python engineering"}
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-23T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "pipeline-threat-model",
+    "title": "Threat-model ingestion pipeline",
+    "description": "Review trust boundaries and controls in the data ingestion path.",
+    "required_skills": [
+      {"id": "data_pipeline", "description": "Building and operating production data pipelines"},
+      {"id": "security_review", "description": "Practical application or infrastructure security review"}
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-24T09:00:00",
+    "latest_end": "2026-09-25T15:00:00"
+  },
+  {
+    "id": "postgres-metrics",
+    "title": "Add PostgreSQL saturation alerts",
+    "description": "Instrument connection, replication, and storage saturation signals.",
+    "required_skills": [
+      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
+      {"id": "observability", "description": "Production metrics, logging, tracing, and alerting"}
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-22T09:00:00",
+    "latest_end": "2026-09-24T18:00:00"
+  }
+]

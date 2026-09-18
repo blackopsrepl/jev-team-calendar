@@ -1,3 +1,3 @@
-mod data_seed;
+mod app_data;
 
-pub use data_seed::{available_demo_data, default_demo_data, generate, DemoData};
+pub use app_data::{available_demo_data, default_demo_data, generate, DemoData};

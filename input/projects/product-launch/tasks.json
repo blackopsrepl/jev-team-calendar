@@ -1,0 +1,52 @@
+[
+  {
+    "id": "customer-interviews", "title": "Run customer interviews", "description": "Interview target operators and synthesize unmet scheduling needs.",
+    "required_skills": [{"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
+    "duration_minutes": 240, "earliest_start": "2026-09-21T09:00:00", "latest_end": "2026-09-22T18:00:00"
+  },
+  {
+    "id": "interaction-design", "title": "Design scheduling workflow", "description": "Turn research findings into an accessible interaction model.",
+    "required_skills": [{"id": "product_design", "description": "Professional product and interaction design"}, {"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
+    "duration_minutes": 240, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-23T18:00:00"
+  },
+  {
+    "id": "frontend-build", "title": "Build launch experience", "description": "Implement the approved launch workflow.",
+    "required_skills": [{"id": "react", "description": "Professional React application development"}, {"id": "typescript", "description": "Production TypeScript development"}],
+    "duration_minutes": 300, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-24T18:00:00"
+  },
+  {
+    "id": "event-instrumentation", "title": "Instrument product events", "description": "Implement reliable activation and retention event collection.",
+    "required_skills": [{"id": "python", "description": "Production Python engineering"}, {"id": "data_pipeline", "description": "Building and operating production data pipelines"}],
+    "duration_minutes": 180, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-24T18:00:00"
+  },
+  {
+    "id": "launch-copy", "title": "Write launch narrative", "description": "Write positioning, onboarding, and release messaging.",
+    "required_skills": [{"id": "copywriting", "description": "Professional product and conversion copywriting"}],
+    "duration_minutes": 180, "earliest_start": "2026-09-21T09:00:00", "latest_end": "2026-09-23T18:00:00"
+  },
+  {
+    "id": "campaign-plan", "title": "Plan launch campaign", "description": "Build channel, audience, and experiment plans for launch.",
+    "required_skills": [{"id": "growth_marketing", "description": "Professional growth marketing and campaign experimentation"}, {"id": "analytics", "description": "Product analytics and experiment measurement"}],
+    "duration_minutes": 240, "earliest_start": "2026-09-21T13:00:00", "latest_end": "2026-09-23T18:00:00"
+  },
+  {
+    "id": "funnel-dashboard", "title": "Build launch funnel dashboard", "description": "Create trustworthy activation and retention reporting.",
+    "required_skills": [{"id": "analytics", "description": "Product analytics and experiment measurement"}, {"id": "data_pipeline", "description": "Building and operating production data pipelines"}],
+    "duration_minutes": 180, "earliest_start": "2026-09-23T09:00:00", "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "usability-validation", "title": "Validate release candidate", "description": "Run usability validation against the implemented workflow.",
+    "required_skills": [{"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
+    "duration_minutes": 180, "earliest_start": "2026-09-24T09:00:00", "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "onboarding-implementation", "title": "Implement onboarding copy", "description": "Integrate approved onboarding content into the product.",
+    "required_skills": [{"id": "react", "description": "Professional React application development"}, {"id": "typescript", "description": "Production TypeScript development"}],
+    "duration_minutes": 150, "earliest_start": "2026-09-23T09:00:00", "latest_end": "2026-09-25T15:00:00"
+  },
+  {
+    "id": "launch-analysis", "title": "Prepare launch measurement", "description": "Define decision thresholds and launch review queries.",
+    "required_skills": [{"id": "analytics", "description": "Product analytics and experiment measurement"}, {"id": "python", "description": "Production Python engineering"}],
+    "duration_minutes": 120, "earliest_start": "2026-09-24T09:00:00", "latest_end": "2026-09-25T18:00:00"
+  }
+]

@@ -1,3 +1,6 @@
+scalar_groups = []
+conflict_repairs = []
+
 [app]
 name = "jev-team-calendar"
 starter = "neutral-shell"
@@ -11,8 +14,90 @@ ui_source = "crates.io: solverforge-ui 0.9.0"
 
 [demo]
 default_size = "standard"
-available_sizes = ["small", "standard", "large"]
+available_sizes = [
+    "small",
+    "standard",
+    "large",
+]
 
 [solution]
 name = "Plan"
 score = "HardSoftScore"
+scalar_groups_path = ""
+conflict_repairs_path = ""
+
+[[facts]]
+name = "candidate"
+plural = "candidates"
+kind = "problem_fact"
+
+[[entities]]
+name = "task"
+plural = "tasks"
+kind = "planning_entity"
+
+[[variables]]
+entity = "task"
+entity_plural = "tasks"
+field = "candidate_idx"
+kind = "scalar"
+range = "candidates"
+elements = ""
+allows_unassigned = true
+enabled = true
+
+[[variables]]
+entity = "task"
+entity_plural = "tasks"
+field = "start_slot"
+kind = "scalar"
+range = ""
+countable_range = "0..90"
+elements = ""
+allows_unassigned = true
+enabled = true
+
+[[constraints]]
+name = "balance_workload"
+module = "balance_workload"
+enabled = true
+
+[[constraints]]
+name = "candidate_availability"
+module = "candidate_availability"
+enabled = true
+
+[[constraints]]
+name = "complete_candidate"
+module = "complete_candidate"
+enabled = true
+
+[[constraints]]
+name = "complete_start"
+module = "complete_start"
+enabled = true
+
+[[constraints]]
+name = "minimize_completion"
+module = "minimize_completion"
+enabled = true
+
+[[constraints]]
+name = "minimize_idle_gaps"
+module = "minimize_idle_gaps"
+enabled = true
+
+[[constraints]]
+name = "no_candidate_overlap"
+module = "no_candidate_overlap"
+enabled = true
+
+[[constraints]]
+name = "required_skills"
+module = "required_skills"
+enabled = true
+
+[[constraints]]
+name = "task_time_window"
+module = "task_time_window"
+enabled = true

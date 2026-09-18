@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "model": "fixture-no-network",
+  "threshold": 0.8,
+  "candidates": [
+    {
+      "id": "alice",
+      "display_name": "Alice Morgan",
+      "source": "input/resumes/alice.md",
+      "skills": {
+        "database_migration": {"qualified": true, "probability": 0.97},
+        "data_pipeline": {"qualified": false, "probability": 0.21},
+        "incident_response": {"qualified": false, "probability": 0.38},
+        "kubernetes": {"qualified": false, "probability": 0.12},
+        "observability": {"qualified": false, "probability": 0.42},
+        "postgresql": {"qualified": true, "probability": 0.99},
+        "python": {"qualified": false, "probability": 0.43},
+        "react": {"qualified": false, "probability": 0.02},
+        "security_review": {"qualified": false, "probability": 0.23},
+        "terraform": {"qualified": true, "probability": 0.91},
+        "typescript": {"qualified": false, "probability": 0.03}
+      },
+      "raw": {"type": "fixture", "note": "Deterministic cached Jev-shaped output for tests and demo"}
+    },
+    {
+      "id": "bob",
+      "display_name": "Bob Chen",
+      "source": "input/resumes/bob.txt",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.18}, "data_pipeline": {"qualified": false, "probability": 0.28}, "incident_response": {"qualified": true, "probability": 0.96}, "kubernetes": {"qualified": true, "probability": 0.99}, "observability": {"qualified": true, "probability": 0.98}, "postgresql": {"qualified": false, "probability": 0.35}, "python": {"qualified": false, "probability": 0.52}, "react": {"qualified": false, "probability": 0.04}, "security_review": {"qualified": false, "probability": 0.33}, "terraform": {"qualified": false, "probability": 0.61}, "typescript": {"qualified": false, "probability": 0.09}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "carol",
+      "display_name": "Carol Singh",
+      "source": "input/resumes/carol.md",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.01}, "data_pipeline": {"qualified": false, "probability": 0.06}, "incident_response": {"qualified": false, "probability": 0.08}, "kubernetes": {"qualified": false, "probability": 0.04}, "observability": {"qualified": false, "probability": 0.13}, "postgresql": {"qualified": false, "probability": 0.03}, "python": {"qualified": false, "probability": 0.31}, "react": {"qualified": true, "probability": 0.99}, "security_review": {"qualified": false, "probability": 0.16}, "terraform": {"qualified": false, "probability": 0.01}, "typescript": {"qualified": true, "probability": 0.99}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "dave",
+      "display_name": "Dave Okafor",
+      "source": "input/resumes/dave.txt",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.66}, "data_pipeline": {"qualified": true, "probability": 0.98}, "incident_response": {"qualified": false, "probability": 0.42}, "kubernetes": {"qualified": false, "probability": 0.28}, "observability": {"qualified": false, "probability": 0.55}, "postgresql": {"qualified": true, "probability": 0.88}, "python": {"qualified": true, "probability": 0.99}, "react": {"qualified": false, "probability": 0.05}, "security_review": {"qualified": false, "probability": 0.22}, "terraform": {"qualified": false, "probability": 0.19}, "typescript": {"qualified": false, "probability": 0.07}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "erin",
+      "display_name": "Erin Alvarez",
+      "source": "input/resumes/erin.md",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.09}, "data_pipeline": {"qualified": false, "probability": 0.17}, "incident_response": {"qualified": false, "probability": 0.57}, "kubernetes": {"qualified": true, "probability": 0.90}, "observability": {"qualified": false, "probability": 0.44}, "postgresql": {"qualified": false, "probability": 0.14}, "python": {"qualified": false, "probability": 0.48}, "react": {"qualified": false, "probability": 0.02}, "security_review": {"qualified": true, "probability": 0.98}, "terraform": {"qualified": true, "probability": 0.97}, "typescript": {"qualified": false, "probability": 0.04}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "frank",
+      "display_name": "Frank Ito",
+      "source": "input/resumes/frank.txt",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.06}, "data_pipeline": {"qualified": false, "probability": 0.46}, "incident_response": {"qualified": false, "probability": 0.21}, "kubernetes": {"qualified": false, "probability": 0.18}, "observability": {"qualified": false, "probability": 0.31}, "postgresql": {"qualified": false, "probability": 0.29}, "python": {"qualified": true, "probability": 0.91}, "react": {"qualified": true, "probability": 0.96}, "security_review": {"qualified": false, "probability": 0.24}, "terraform": {"qualified": false, "probability": 0.11}, "typescript": {"qualified": true, "probability": 0.97}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "grace",
+      "display_name": "Grace Nwosu",
+      "source": "input/resumes/grace.md",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.73}, "data_pipeline": {"qualified": false, "probability": 0.33}, "incident_response": {"qualified": true, "probability": 0.94}, "kubernetes": {"qualified": false, "probability": 0.23}, "observability": {"qualified": true, "probability": 0.96}, "postgresql": {"qualified": true, "probability": 0.98}, "python": {"qualified": false, "probability": 0.44}, "react": {"qualified": false, "probability": 0.01}, "security_review": {"qualified": false, "probability": 0.26}, "terraform": {"qualified": false, "probability": 0.20}, "typescript": {"qualified": false, "probability": 0.02}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "heidi",
+      "display_name": "Heidi Laurent",
+      "source": "input/resumes/heidi.txt",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.13}, "data_pipeline": {"qualified": true, "probability": 0.97}, "incident_response": {"qualified": false, "probability": 0.31}, "kubernetes": {"qualified": false, "probability": 0.24}, "observability": {"qualified": false, "probability": 0.39}, "postgresql": {"qualified": false, "probability": 0.36}, "python": {"qualified": true, "probability": 0.96}, "react": {"qualified": false, "probability": 0.02}, "security_review": {"qualified": true, "probability": 0.91}, "terraform": {"qualified": false, "probability": 0.16}, "typescript": {"qualified": false, "probability": 0.04}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "ivy", "display_name": "Ivy Mensah", "source": "input/resumes/ivy.md",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.02}, "data_pipeline": {"qualified": false, "probability": 0.04}, "incident_response": {"qualified": false, "probability": 0.05}, "kubernetes": {"qualified": false, "probability": 0.03}, "observability": {"qualified": false, "probability": 0.12}, "postgresql": {"qualified": false, "probability": 0.02}, "python": {"qualified": false, "probability": 0.03}, "react": {"qualified": false, "probability": 0.12}, "security_review": {"qualified": false, "probability": 0.18}, "terraform": {"qualified": false, "probability": 0.03}, "typescript": {"qualified": false, "probability": 0.08}
+      },
+      "raw": {"type": "fixture"}
+    },
+    {
+      "id": "jack", "display_name": "Jack Romero", "source": "input/resumes/jack.txt",
+      "skills": {
+        "database_migration": {"qualified": false, "probability": 0.02}, "data_pipeline": {"qualified": false, "probability": 0.07}, "incident_response": {"qualified": false, "probability": 0.06}, "kubernetes": {"qualified": false, "probability": 0.03}, "observability": {"qualified": false, "probability": 0.16}, "postgresql": {"qualified": false, "probability": 0.02}, "python": {"qualified": false, "probability": 0.16}, "react": {"qualified": false, "probability": 0.04}, "security_review": {"qualified": false, "probability": 0.09}, "terraform": {"qualified": false, "probability": 0.04}, "typescript": {"qualified": false, "probability": 0.06}
+      },
+      "raw": {"type": "fixture"}
+    }
+  ]
+}

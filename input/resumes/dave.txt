@@ -1,0 +1,27 @@
+Dave Okafor
+SENIOR DATA PLATFORM ENGINEER
+Amsterdam, Netherlands | dave.okafor@example.test
+
+PROFILE
+Data platform engineer with ten years of production Python experience. Builds and operates resumable batch and streaming pipelines, high-volume backfills, and PostgreSQL-backed analytical services.
+
+EMPLOYMENT
+
+Metric Harbor, Senior Data Platform Engineer | 2020–Present
+- Develop and review production Python services and Airflow workflows processing 4.2 billion events per day.
+- Designed a resumable 180 TB warehouse backfill with idempotent partitions, checkpoints, retries, dead-letter handling, and automated reconciliation.
+- Own pipeline deployment, monitoring, on-call support, incident response, and runbooks; improved successful daily completion from 97.8% to 99.95%.
+- Built data-quality gates and lineage checks in Python and dbt before downstream publication.
+- Partnered with product analysts to define activation and retention funnels, prepare experiment cohorts, and publish trustworthy product-metric datasets and dashboards.
+- Administer PostgreSQL warehouse metadata databases, including replication, indexing, vacuum tuning, backup tests, and connection management.
+
+Beacon Retail, Data Engineer | 2016–2020
+- Built Python ETL pipelines integrating order, inventory, and customer systems into a PostgreSQL warehouse.
+- Migrated scheduled scripts into observable Airflow DAGs with retry policy and ownership metadata.
+- Implemented schema-change detection and source-to-target row-count reconciliation.
+
+TECHNICAL SKILLS
+Python, Airflow, data pipeline design and operations, Kafka, dbt, product analytics, experiment measurement, PostgreSQL administration, SQL, backfills, observability, AWS.
+
+EDUCATION
+MSc Data Engineering, Delft University of Technology, 2016

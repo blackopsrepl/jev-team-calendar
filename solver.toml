@@ -1,6 +1,8 @@
 [[phases]]
 type = "construction_heuristic"
-construction_heuristic_type = "first_fit"
+construction_heuristic_type = "cheapest_insertion"
+construction_obligation = "assign_when_candidate_exists"
+value_candidate_limit = 90
 
 [[phases]]
 type = "local_search"
@@ -12,7 +14,8 @@ type = "accepted_count"
 limit = 4
 
 [termination]
-seconds_spent_limit = 30
+seconds_spent_limit = 8
+unimproved_seconds_spent_limit = 3
 
 # Opt in to bounded candidate-pull diagnostics when needed. Trace detail is
 # retained separately from ordinary status, snapshot, and SSE telemetry.

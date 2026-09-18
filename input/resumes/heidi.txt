@@ -1,0 +1,26 @@
+Heidi Laurent
+SENIOR DATA SECURITY ENGINEER
+Paris, France | heidi.laurent@example.test
+
+PROFILE
+Security-minded data engineer with nine years of production Python and pipeline operations. Leads security reviews and threat models for ingestion systems handling sensitive customer data.
+
+EXPERIENCE
+
+Signal Foundry, Senior Data Security Engineer | 2021–Present
+- Built and operated Python streaming and batch pipelines processing 900 million customer events daily.
+- Own deployment, retries, replay, schema validation, monitoring, incident support, and disaster-recovery exercises for the ingestion platform.
+- Led formal security reviews and threat models for collection APIs, queues, object storage, transformation jobs, and warehouse publication.
+- Documented trust boundaries and abuse cases, prioritized findings, implemented controls, and verified remediation with penetration-test and audit evidence.
+- Added tenant isolation, least-privilege service identities, encryption controls, immutable audit trails, and automated secret scanning.
+
+Maison Data, Data Engineer | 2017–2021
+- Developed production Python ETL and Kafka consumers with idempotency and dead-letter handling.
+- Implemented data access reviews and retention enforcement for analytics pipelines.
+- Supported pipeline on-call and conducted post-incident analysis.
+
+SKILLS
+Python, production data pipelines, Kafka, Airflow, security review, threat modeling, access control, audit logging, incident response, cloud data platforms.
+
+EDUCATION
+MSc Information Security, Télécom Paris, 2017

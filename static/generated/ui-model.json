@@ -1,6 +1,60 @@
 {
-  "entities": [],
-  "facts": [],
-  "constraints": [],
-  "views": []
+  "conflictRepairs": [],
+  "constraints": [
+    "balance_workload",
+    "candidate_availability",
+    "complete_candidate",
+    "complete_start",
+    "minimize_completion",
+    "minimize_idle_gaps",
+    "no_candidate_overlap",
+    "required_skills",
+    "task_time_window"
+  ],
+  "entities": [
+    {
+      "label": "Task",
+      "name": "task",
+      "plural": "tasks"
+    }
+  ],
+  "facts": [
+    {
+      "label": "Candidate",
+      "name": "candidate",
+      "plural": "candidates"
+    }
+  ],
+  "scalarGroups": [],
+  "views": [
+    {
+      "allowsUnassigned": true,
+      "countableRange": null,
+      "entity": "task",
+      "entityPlural": "tasks",
+      "id": "task-candidate_idx",
+      "kind": "scalar",
+      "label": "Task · candidate_idx",
+      "listMetadata": {},
+      "scalarHooks": {},
+      "sourcePlural": "candidates",
+      "variableField": "candidate_idx"
+    },
+    {
+      "allowsUnassigned": true,
+      "countableRange": {
+        "from": 0,
+        "to": 90
+      },
+      "entity": "task",
+      "entityPlural": "tasks",
+      "id": "task-start_slot",
+      "kind": "scalar",
+      "label": "Task · start_slot",
+      "listMetadata": {},
+      "scalarHooks": {},
+      "sourcePlural": "",
+      "variableField": "start_slot"
+    }
+  ]
 }

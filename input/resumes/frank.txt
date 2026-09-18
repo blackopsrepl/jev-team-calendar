@@ -1,0 +1,26 @@
+Frank Ito
+FULL-STACK SOFTWARE ENGINEER
+Seattle, USA | frank.ito@example.test
+
+SUMMARY
+Full-stack engineer with seven years of production React, TypeScript, and Python delivery. Owns frontend architecture and release automation for developer-facing products.
+
+EXPERIENCE
+
+BuildRail, Senior Software Engineer | 2022–Present
+- Build and maintain a React and TypeScript release-management application used by 600 engineering teams.
+- Designed typed client state, streaming job updates, accessible forms, and browser test suites.
+- Created Python release automation that validates manifests, artifacts, signatures, and deployment readiness across 90 repositories.
+- Reduced failed releases by 38% by adding deterministic preflight checks and actionable diagnostics.
+- Participate in application on-call; infrastructure platform operation is owned by a separate SRE team.
+
+Paperplane, Software Engineer | 2019–2022
+- Delivered React/TypeScript account and billing workflows backed by Python APIs.
+- Introduced strict TypeScript and component contract tests during a multi-quarter frontend migration.
+- Maintained Python CI tooling and packaging scripts.
+
+SKILLS
+React, TypeScript, Python, browser APIs, accessibility, Playwright, FastAPI, CI/CD automation, software packaging.
+
+EDUCATION
+BS Computer Science, University of Washington, 2019

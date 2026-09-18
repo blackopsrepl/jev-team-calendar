@@ -1,2 +1,7 @@
 /target
 **/*.rs.bk
+.env
+.venv/
+__pycache__/
+*.py[cod]
+generated/

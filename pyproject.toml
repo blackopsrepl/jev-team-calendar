@@ -1,0 +1,12 @@
+[project]
+name = "jev-team-calendar-tools"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["typesafe-sdk"]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tools/tests"]
+pythonpath = ["."]

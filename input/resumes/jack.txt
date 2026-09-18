@@ -1,0 +1,26 @@
+Jack Romero
+GROWTH MARKETING LEAD
+Austin, USA | jack.romero@example.test
+
+SUMMARY
+Growth marketer and product copywriter with ten years of experience launching B2B software. Combines campaign strategy, conversion writing, experimentation, and funnel analytics.
+
+EXPERIENCE
+
+Relaydesk, Growth Marketing Lead | 2021–Present
+- Led go-to-market planning for three product launches spanning audience segmentation, channel mix, lifecycle messaging, sales enablement, and measurement.
+- Wrote positioning, landing pages, onboarding sequences, in-product prompts, release announcements, and customer case studies.
+- Designed and analyzed acquisition and activation experiments; improved trial-to-activation conversion from 28% to 39% over four quarters.
+- Built funnel dashboards in Amplitude and SQL, defined event taxonomies with product teams, and presented weekly decision reviews.
+- Managed paid, partner, email, and content campaigns with a $1.4M annual budget.
+
+Harbor CRM, Senior Product Marketing Manager | 2017–2021
+- Developed launch narratives and conversion copy for workflow and analytics products.
+- Ran message tests, cohort analyses, and onboarding experiments.
+- Partnered with design and engineering to instrument campaign attribution and product activation.
+
+SKILLS
+Growth marketing, product launches, campaign experimentation, product copywriting, positioning, lifecycle marketing, product analytics, Amplitude, SQL, conversion optimization.
+
+EDUCATION
+BA Communications and Statistics, University of Texas at Austin, 2016

@@ -1,4 +1,29 @@
 {
-  "title": "jev-team-calendar",
-  "subtitle": "Constraint Optimizer"
+  "title": "Jev Team Calendar",
+  "subtitle": "Project skills from resumes. Scheduling by SolverForge.",
+  "constraints": [
+    "complete_candidate",
+    "complete_start",
+    "required_skills",
+    "no_candidate_overlap",
+    "task_time_window",
+    "candidate_availability",
+    "minimize_completion",
+    "minimize_idle_gaps",
+    "balance_workload"
+  ],
+  "entities": [
+    {
+      "name": "task",
+      "label": "Task",
+      "plural": "tasks"
+    }
+  ],
+  "facts": [
+    {
+      "name": "candidate",
+      "label": "Candidate",
+      "plural": "candidates"
+    }
+  ]
 }

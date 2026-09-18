@@ -1,0 +1,26 @@
+Bob Chen
+STAFF SITE RELIABILITY ENGINEER
+Toronto, Canada | bob.chen@example.test
+
+SUMMARY
+Site reliability engineer with nine years of experience operating Kubernetes platforms and leading response to customer-impacting incidents. Builds observable systems and practical operational standards.
+
+EXPERIENCE
+
+CloudFleet, Staff Site Reliability Engineer | 2022–Present
+- Technical owner for 22 production Kubernetes clusters supporting roughly 1,800 workloads across AWS and GCP.
+- Planned and executed control-plane and node upgrades from Kubernetes 1.24 through 1.31, including compatibility reviews, canary clusters, rollback gates, and workload recovery validation.
+- Served as incident commander for 17 severity-one events involving networking, API-server saturation, certificate expiry, and regional dependency failures.
+- Introduced Prometheus recording rules, OpenTelemetry traces, SLO dashboards, and paging policies; reduced median detection time from 14 minutes to 4 minutes.
+- Wrote cluster recovery runbooks and led quarterly game days for etcd restore, node-pool failure, and traffic evacuation.
+
+ParcelWorks, Senior SRE | 2018–2022
+- Operated multi-tenant Kubernetes clusters and the surrounding ingress, service mesh, secrets, and autoscaling systems.
+- Built alerting and capacity forecasting for control-plane latency, pod scheduling, memory pressure, and persistent-volume exhaustion.
+- Participated in a 24x7 incident rotation and facilitated blameless post-incident reviews.
+
+SKILLS
+Production Kubernetes administration; incident command; Prometheus; Grafana; OpenTelemetry; SLOs; Linux; Go; cloud networking; disaster recovery.
+
+EDUCATION
+BASc Software Engineering, University of Waterloo, 2017

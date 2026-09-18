@@ -6,6 +6,7 @@ use axum::{
 };
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use tokio::process::Command;
 
 use super::dto::{
     analysis_response, JobAnalysisDto, JobSnapshotDto, JobSummaryDto, JobTelemetryDetailDto,
@@ -41,6 +42,7 @@ pub fn router(state: Arc<AppState>) -> Router {
         .route("/info", get(info))
         .route("/demo-data", get(list_demo_data))
         .route("/demo-data/{id}", get(get_demo_data))
+        .route("/projects/{id}/ingest", post(ingest_resumes))
         .route("/jobs", post(create_job))
         .route("/jobs/qualified", post(create_qualified_job))
         .route("/jobs/{id}", get(get_job).delete(delete_job))
@@ -101,6 +103,48 @@ async fn get_demo_data(Path(id): Path<String>) -> Result<Json<PlanDto>, StatusCo
     let demo = id.parse::<DemoData>().map_err(|_| StatusCode::NOT_FOUND)?;
     let plan = generate(demo);
     Ok(Json(PlanDto::from_plan(&plan)))
+}
+
+#[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
+struct IngestResponse {
+    status: &'static str,
+    message: String,
+}
+
+/// Runs Jev preprocessing as an explicit application action, never from a solve.
+async fn ingest_resumes(Path(id): Path<String>) -> Result<Json<IngestResponse>, StatusCode> {
+    let project = id.parse::<DemoData>().map_err(|_| StatusCode::NOT_FOUND)?;
+    let root = env!("CARGO_MANIFEST_DIR");
+    let tasks = format!("input/projects/{}/tasks.json", project.id());
+    let output_path = format!("generated/projects/{}/jev_candidates.json", project.id());
+    let output = Command::new("uv")
+        .args([
+            "run",
+            "--project",
+            root,
+            "python",
+            "tools/jev_ingest.py",
+            "--tasks",
+            &tasks,
+            "--output",
+            &output_path,
+        ])
+        .current_dir(root)
+        .output()
+        .await
+        .map_err(|_| StatusCode::INTERNAL_SERVER_ERROR)?;
+    if !output.status.success() {
+        eprintln!(
+            "resume ingestion failed: {}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        return Err(StatusCode::BAD_GATEWAY);
+    }
+    Ok(Json(IngestResponse {
+        status: "COMPLETED",
+        message: String::from_utf8_lossy(&output.stdout).trim().to_string(),
+    }))
 }
 
 #[derive(Serialize)]
