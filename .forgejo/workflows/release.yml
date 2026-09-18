@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  forgejo-release:
+    name: Publish Forgejo release
+    runs-on: python
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SERVER: ${{ github.server_url }}
+          REPOSITORY: ${{ github.repository }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import re
+          import urllib.request
+
+          tag = os.environ["TAG"]
+          version = tag[1:] if tag.startswith("v") else tag
+          body = f"Release {tag}."
+
+          try:
+              with open("CHANGELOG.md", encoding="utf-8") as handle:
+                  text = handle.read()
+              match = re.search(
+                  r"^##\s+\[?" + re.escape(version) + r"\]?.*?\n(.*?)(?=^##\s|\Z)",
+                  text,
+                  re.M | re.S,
+              )
+              if match and match.group(1).strip():
+                  body = match.group(1).strip()
+          except FileNotFoundError:
+              pass
+
+          payload = json.dumps(
+              {"tag_name": tag, "name": tag, "body": body}
+          ).encode("utf-8")
+          url = (
+              os.environ["SERVER"]
+              + "/api/v1/repos/"
+              + os.environ["REPOSITORY"]
+              + "/releases"
+          )
+          request = urllib.request.Request(
+              url,
+              data=payload,
+              method="POST",
+              headers={
+                  "Authorization": "token " + os.environ["TOKEN"],
+                  "Content-Type": "application/json",
+              },
+          )
+          with urllib.request.urlopen(request) as response:
+              print("release created:", response.status)
+          PY
