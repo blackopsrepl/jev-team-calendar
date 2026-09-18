@@ -4,142 +4,519 @@
     "title": "Migrate PostgreSQL production cluster",
     "description": "Move the production PostgreSQL cluster with minimal downtime.",
     "required_skills": [
-      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
-      {"id": "database_migration", "description": "Experience planning and executing production database migrations"}
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "database_migration",
+        "description": "Experience planning and executing production database migrations"
+      }
     ],
     "duration_minutes": 180,
     "earliest_start": "2026-09-21T09:00:00",
-    "latest_end": "2026-09-22T18:00:00"
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "failover-drill",
+    "title": "Run database failover drill",
+    "description": "Exercise automated failover and measure recovery time.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "incident_response",
+        "description": "Hands-on production incident response"
+      }
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "postgres-metrics",
+    "title": "Add PostgreSQL saturation alerts",
+    "description": "Instrument connection, lock, and replication saturation.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "observability",
+        "description": "Production metrics, logging, tracing, and alerting"
+      }
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "replica-rebalance",
+    "title": "Rebalance read replica traffic",
+    "description": "Rebalance read traffic across replicas without hot spots.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "vacuum-tuning",
+    "title": "Tune autovacuum on the primary",
+    "description": "Tune autovacuum thresholds for the highest-churn tables.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "database_migration",
+        "description": "Experience planning and executing production database migrations"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "backup-restore-test",
+    "title": "Prove point-in-time restore",
+    "description": "Prove point-in-time restore into an isolated environment.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "terraform",
+        "description": "Production infrastructure as code with Terraform"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "query-plan-audit",
+    "title": "Audit slow query plans",
+    "description": "Audit slow query plans and fix the worst offenders.",
+    "required_skills": [
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "schema-change-guardrails",
+    "title": "Add schema change guardrails",
+    "description": "Add automated validation for destructive schema changes.",
+    "required_skills": [
+      {
+        "id": "database_migration",
+        "description": "Experience planning and executing production database migrations"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
     "id": "cluster-upgrade",
     "title": "Upgrade the Kubernetes control plane",
     "description": "Upgrade the production control plane and validate service recovery.",
     "required_skills": [
-      {"id": "kubernetes", "description": "Production Kubernetes administration"},
-      {"id": "incident_response", "description": "Hands-on production incident response"}
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      },
+      {
+        "id": "incident_response",
+        "description": "Hands-on production incident response"
+      }
     ],
     "duration_minutes": 240,
     "earliest_start": "2026-09-21T09:00:00",
-    "latest_end": "2026-09-21T17:00:00"
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "observability-rollout",
+    "title": "Roll out cluster telemetry",
+    "description": "Roll out metrics, logs, and traces across the cluster.",
+    "required_skills": [
+      {
+        "id": "observability",
+        "description": "Production metrics, logging, tracing, and alerting"
+      },
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "infra-provisioning",
+    "title": "Provision staging cluster",
+    "description": "Provision an isolated staging cluster from code.",
+    "required_skills": [
+      {
+        "id": "terraform",
+        "description": "Production infrastructure as code with Terraform"
+      },
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "node-autoscaling",
+    "title": "Enable node autoscaling",
+    "description": "Configure node autoscaling and verify scale-down behaviour.",
+    "required_skills": [
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "ingress-hardening",
+    "title": "Harden cluster ingress",
+    "description": "Harden ingress TLS, headers, and rate limits.",
+    "required_skills": [
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      },
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "cert-rotation",
+    "title": "Automate control-plane certificate rotation",
+    "description": "Automate certificate rotation and renewal checks.",
+    "required_skills": [
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      },
+      {
+        "id": "terraform",
+        "description": "Production infrastructure as code with Terraform"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "namespace-policy",
+    "title": "Enforce namespace network policy",
+    "description": "Enforce default-deny network policy per namespace.",
+    "required_skills": [
+      {
+        "id": "kubernetes",
+        "description": "Production Kubernetes administration"
+      },
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "terraform-modules",
+    "title": "Consolidate Terraform modules",
+    "description": "Consolidate duplicated Terraform modules and state.",
+    "required_skills": [
+      {
+        "id": "terraform",
+        "description": "Production infrastructure as code with Terraform"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
     "id": "frontend-accessibility",
     "title": "Repair calendar accessibility",
     "description": "Implement keyboard navigation and accessible timeline semantics.",
     "required_skills": [
-      {"id": "react", "description": "Professional React application development"},
-      {"id": "typescript", "description": "Production TypeScript development"}
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
     ],
     "duration_minutes": 180,
-    "earliest_start": "2026-09-21T10:00:00",
-    "latest_end": "2026-09-22T18:00:00"
-  },
-  {
-    "id": "etl-backfill",
-    "title": "Backfill warehouse events",
-    "description": "Build and operate a resumable event backfill into the warehouse.",
-    "required_skills": [
-      {"id": "python", "description": "Production Python engineering"},
-      {"id": "data_pipeline", "description": "Building and operating production data pipelines"}
-    ],
-    "duration_minutes": 240,
     "earliest_start": "2026-09-21T09:00:00",
-    "latest_end": "2026-09-23T18:00:00"
-  },
-  {
-    "id": "security-review",
-    "title": "Review infrastructure boundary",
-    "description": "Threat-model the deployment boundary and close high-risk findings.",
-    "required_skills": [
-      {"id": "security_review", "description": "Practical application or infrastructure security review"},
-      {"id": "terraform", "description": "Production infrastructure as code with Terraform"}
-    ],
-    "duration_minutes": 180,
-    "earliest_start": "2026-09-22T09:00:00",
-    "latest_end": "2026-09-23T15:00:00"
-  },
-  {
-    "id": "observability-rollout",
-    "title": "Roll out cluster telemetry",
-    "description": "Deploy metrics and alerts for cluster saturation and control-plane health.",
-    "required_skills": [
-      {"id": "observability", "description": "Production metrics, logging, tracing, and alerting"},
-      {"id": "kubernetes", "description": "Production Kubernetes administration"}
-    ],
-    "duration_minutes": 180,
-    "earliest_start": "2026-09-21T13:00:00",
-    "latest_end": "2026-09-22T18:00:00"
-  },
-  {
-    "id": "failover-drill",
-    "title": "Run database failover drill",
-    "description": "Execute and document a production-like PostgreSQL failover exercise.",
-    "required_skills": [
-      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
-      {"id": "incident_response", "description": "Hands-on production incident response"}
-    ],
-    "duration_minutes": 120,
-    "earliest_start": "2026-09-21T13:00:00",
-    "latest_end": "2026-09-22T12:00:00"
-  },
-  {
-    "id": "infra-provisioning",
-    "title": "Provision staging cluster",
-    "description": "Create the staging cluster from reviewed infrastructure modules.",
-    "required_skills": [
-      {"id": "terraform", "description": "Production infrastructure as code with Terraform"},
-      {"id": "kubernetes", "description": "Production Kubernetes administration"}
-    ],
-    "duration_minutes": 180,
-    "earliest_start": "2026-09-23T09:00:00",
     "latest_end": "2026-09-25T18:00:00"
   },
   {
     "id": "dashboard-repair",
     "title": "Repair operations dashboard",
-    "description": "Correct stale frontend state and add regression coverage.",
+    "description": "Fix broken panels and data joins in the operations dashboard.",
     "required_skills": [
-      {"id": "react", "description": "Professional React application development"},
-      {"id": "typescript", "description": "Production TypeScript development"}
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
     ],
     "duration_minutes": 120,
-    "earliest_start": "2026-09-22T09:00:00",
-    "latest_end": "2026-09-23T18:00:00"
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "release-automation",
-    "title": "Automate release verification",
-    "description": "Build deterministic release checks and artifact validation.",
+    "id": "design-tokens",
+    "title": "Extract shared design tokens",
+    "description": "Extract shared design tokens into a single published source.",
     "required_skills": [
-      {"id": "python", "description": "Production Python engineering"}
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
     ],
     "duration_minutes": 150,
-    "earliest_start": "2026-09-23T09:00:00",
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "chart-performance",
+    "title": "Optimize chart rendering",
+    "description": "Optimize chart rendering for large result sets.",
+    "required_skills": [
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "etl-backfill",
+    "title": "Backfill warehouse events",
+    "description": "Backfill the warehouse with replayed events.",
+    "required_skills": [
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      },
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      }
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
     "latest_end": "2026-09-25T18:00:00"
   },
   {
     "id": "pipeline-threat-model",
     "title": "Threat-model ingestion pipeline",
-    "description": "Review trust boundaries and controls in the data ingestion path.",
+    "description": "Threat-model the ingestion pipeline and record mitigations.",
     "required_skills": [
-      {"id": "data_pipeline", "description": "Building and operating production data pipelines"},
-      {"id": "security_review", "description": "Practical application or infrastructure security review"}
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      },
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      }
     ],
     "duration_minutes": 120,
-    "earliest_start": "2026-09-24T09:00:00",
-    "latest_end": "2026-09-25T15:00:00"
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "postgres-metrics",
-    "title": "Add PostgreSQL saturation alerts",
-    "description": "Instrument connection, replication, and storage saturation signals.",
+    "id": "stream-schema-evolution",
+    "title": "Add streaming schema evolution",
+    "description": "Support backward-compatible schema evolution in the stream.",
     "required_skills": [
-      {"id": "postgresql", "description": "Practical administration and production operation of PostgreSQL"},
-      {"id": "observability", "description": "Production metrics, logging, tracing, and alerting"}
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
     ],
-    "duration_minutes": 120,
-    "earliest_start": "2026-09-22T09:00:00",
-    "latest_end": "2026-09-24T18:00:00"
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "lineage-capture",
+    "title": "Capture pipeline lineage",
+    "description": "Capture column-level lineage for the core pipelines.",
+    "required_skills": [
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "warehouse-partitioning",
+    "title": "Repartition the events table",
+    "description": "Repartition the events table for cheaper scans.",
+    "required_skills": [
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      },
+      {
+        "id": "postgresql",
+        "description": "Practical administration and production operation of PostgreSQL"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "security-review",
+    "title": "Review infrastructure boundary",
+    "description": "Review the production infrastructure security boundary.",
+    "required_skills": [
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      },
+      {
+        "id": "terraform",
+        "description": "Production infrastructure as code with Terraform"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "secret-rotation",
+    "title": "Rotate service credentials",
+    "description": "Rotate service credentials with zero-downtime rollout.",
+    "required_skills": [
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "supply-chain-audit",
+    "title": "Audit the build supply chain",
+    "description": "Audit build dependencies and artifact provenance.",
+    "required_skills": [
+      {
+        "id": "security_review",
+        "description": "Practical application or infrastructure security review"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "release-automation",
+    "title": "Automate release verification",
+    "description": "Automate post-deploy release verification checks.",
+    "required_skills": [
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "ci-cache-tuning",
+    "title": "Tune CI cache reuse",
+    "description": "Tune CI cache keys to cut build times.",
+    "required_skills": [
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   }
 ]

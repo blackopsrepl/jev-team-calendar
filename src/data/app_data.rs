@@ -207,7 +207,7 @@ mod tests {
     fn cached_jev_facts_and_tasks_deserialize() {
         let plan = load_plan(DemoData::PlatformReliability).unwrap();
         assert_eq!(plan.candidates.len(), 10);
-        assert_eq!(plan.tasks.len(), 12);
+        assert_eq!(plan.tasks.len(), 30);
         assert!(plan
             .candidates
             .iter()

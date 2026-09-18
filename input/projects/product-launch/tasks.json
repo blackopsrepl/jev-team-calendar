@@ -1,52 +1,370 @@
 [
   {
-    "id": "customer-interviews", "title": "Run customer interviews", "description": "Interview target operators and synthesize unmet scheduling needs.",
-    "required_skills": [{"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
-    "duration_minutes": 240, "earliest_start": "2026-09-21T09:00:00", "latest_end": "2026-09-22T18:00:00"
+    "id": "customer-interviews",
+    "title": "Run customer discovery interviews",
+    "description": "Run and synthesize discovery interviews with target users.",
+    "required_skills": [
+      {
+        "id": "ux_research",
+        "description": "Professional user research, interviewing, and evidence synthesis"
+      }
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "interaction-design", "title": "Design scheduling workflow", "description": "Turn research findings into an accessible interaction model.",
-    "required_skills": [{"id": "product_design", "description": "Professional product and interaction design"}, {"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
-    "duration_minutes": 240, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-23T18:00:00"
+    "id": "interaction-design",
+    "title": "Design onboarding interactions",
+    "description": "Design the onboarding interactions end to end.",
+    "required_skills": [
+      {
+        "id": "product_design",
+        "description": "Professional product and interaction design"
+      },
+      {
+        "id": "ux_research",
+        "description": "Professional user research, interviewing, and evidence synthesis"
+      }
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "frontend-build", "title": "Build launch experience", "description": "Implement the approved launch workflow.",
-    "required_skills": [{"id": "react", "description": "Professional React application development"}, {"id": "typescript", "description": "Production TypeScript development"}],
-    "duration_minutes": 300, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-24T18:00:00"
+    "id": "design-review",
+    "title": "Review design accessibility",
+    "description": "Review the launch designs for accessibility compliance.",
+    "required_skills": [
+      {
+        "id": "product_design",
+        "description": "Professional product and interaction design"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "event-instrumentation", "title": "Instrument product events", "description": "Implement reliable activation and retention event collection.",
-    "required_skills": [{"id": "python", "description": "Production Python engineering"}, {"id": "data_pipeline", "description": "Building and operating production data pipelines"}],
-    "duration_minutes": 180, "earliest_start": "2026-09-22T09:00:00", "latest_end": "2026-09-24T18:00:00"
+    "id": "frontend-build",
+    "title": "Build the launch frontend",
+    "description": "Build the launch frontend against the final designs.",
+    "required_skills": [
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
+    ],
+    "duration_minutes": 300,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "launch-copy", "title": "Write launch narrative", "description": "Write positioning, onboarding, and release messaging.",
-    "required_skills": [{"id": "copywriting", "description": "Professional product and conversion copywriting"}],
-    "duration_minutes": 180, "earliest_start": "2026-09-21T09:00:00", "latest_end": "2026-09-23T18:00:00"
+    "id": "onboarding-implementation",
+    "title": "Implement onboarding flow",
+    "description": "Implement the onboarding flow with validation and telemetry.",
+    "required_skills": [
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "campaign-plan", "title": "Plan launch campaign", "description": "Build channel, audience, and experiment plans for launch.",
-    "required_skills": [{"id": "growth_marketing", "description": "Professional growth marketing and campaign experimentation"}, {"id": "analytics", "description": "Product analytics and experiment measurement"}],
-    "duration_minutes": 240, "earliest_start": "2026-09-21T13:00:00", "latest_end": "2026-09-23T18:00:00"
+    "id": "design-system",
+    "title": "Build launch design system",
+    "description": "Build the launch design system and document usage.",
+    "required_skills": [
+      {
+        "id": "product_design",
+        "description": "Professional product and interaction design"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "funnel-dashboard", "title": "Build launch funnel dashboard", "description": "Create trustworthy activation and retention reporting.",
-    "required_skills": [{"id": "analytics", "description": "Product analytics and experiment measurement"}, {"id": "data_pipeline", "description": "Building and operating production data pipelines"}],
-    "duration_minutes": 180, "earliest_start": "2026-09-23T09:00:00", "latest_end": "2026-09-25T18:00:00"
+    "id": "component-library",
+    "title": "Publish shared component library",
+    "description": "Publish the shared component library for the launch surfaces.",
+    "required_skills": [
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "typescript",
+        "description": "Production TypeScript development"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "usability-validation", "title": "Validate release candidate", "description": "Run usability validation against the implemented workflow.",
-    "required_skills": [{"id": "ux_research", "description": "Professional user research, interviewing, and evidence synthesis"}],
-    "duration_minutes": 180, "earliest_start": "2026-09-24T09:00:00", "latest_end": "2026-09-25T18:00:00"
+    "id": "frontend-performance",
+    "title": "Optimize launch page performance",
+    "description": "Optimize the launch page for first contentful paint.",
+    "required_skills": [
+      {
+        "id": "react",
+        "description": "Professional React application development"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "onboarding-implementation", "title": "Implement onboarding copy", "description": "Integrate approved onboarding content into the product.",
-    "required_skills": [{"id": "react", "description": "Professional React application development"}, {"id": "typescript", "description": "Production TypeScript development"}],
-    "duration_minutes": 150, "earliest_start": "2026-09-23T09:00:00", "latest_end": "2026-09-25T15:00:00"
+    "id": "event-instrumentation",
+    "title": "Instrument product events",
+    "description": "Instrument the launch event taxonomy end to end.",
+    "required_skills": [
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      },
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   },
   {
-    "id": "launch-analysis", "title": "Prepare launch measurement", "description": "Define decision thresholds and launch review queries.",
-    "required_skills": [{"id": "analytics", "description": "Product analytics and experiment measurement"}, {"id": "python", "description": "Production Python engineering"}],
-    "duration_minutes": 120, "earliest_start": "2026-09-24T09:00:00", "latest_end": "2026-09-25T18:00:00"
+    "id": "funnel-dashboard",
+    "title": "Build funnel dashboard",
+    "description": "Build the signup and activation funnel dashboard.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "launch-analysis",
+    "title": "Analyze launch cohorts",
+    "description": "Analyze launch cohorts against the baseline.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "experiment-design",
+    "title": "Design launch experiments",
+    "description": "Design the launch A/B experiments and guardrails.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "growth_marketing",
+        "description": "Professional growth marketing and campaign experimentation"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "experiment-analysis",
+    "title": "Analyze experiment results",
+    "description": "Analyze experiment results and recommend rollout.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "python",
+        "description": "Production Python engineering"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "retention-model",
+    "title": "Model early retention",
+    "description": "Model early retention curves from launch data.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "launch-copy",
+    "title": "Write the launch announcement",
+    "description": "Write the public launch announcement and FAQ.",
+    "required_skills": [
+      {
+        "id": "copywriting",
+        "description": "Professional product and conversion copywriting"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "campaign-plan",
+    "title": "Plan the launch campaign",
+    "description": "Plan the multi-channel launch campaign.",
+    "required_skills": [
+      {
+        "id": "growth_marketing",
+        "description": "Professional growth marketing and campaign experimentation"
+      },
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      }
+    ],
+    "duration_minutes": 240,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "lifecycle-emails",
+    "title": "Write lifecycle email sequence",
+    "description": "Write the lifecycle email sequence for new accounts.",
+    "required_skills": [
+      {
+        "id": "copywriting",
+        "description": "Professional product and conversion copywriting"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "conversion-audit",
+    "title": "Audit the signup funnel copy",
+    "description": "Audit and rewrite the signup funnel copy.",
+    "required_skills": [
+      {
+        "id": "copywriting",
+        "description": "Professional product and conversion copywriting"
+      },
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "pricing-page",
+    "title": "Draft the pricing page copy",
+    "description": "Draft pricing page copy and objection handling.",
+    "required_skills": [
+      {
+        "id": "copywriting",
+        "description": "Professional product and conversion copywriting"
+      }
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "growth-loop",
+    "title": "Design the referral growth loop",
+    "description": "Design the referral loop and incentive mechanics.",
+    "required_skills": [
+      {
+        "id": "growth_marketing",
+        "description": "Professional growth marketing and campaign experimentation"
+      }
+    ],
+    "duration_minutes": 180,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "partner-brief",
+    "title": "Write partner launch brief",
+    "description": "Write the partner and press launch brief.",
+    "required_skills": [
+      {
+        "id": "copywriting",
+        "description": "Professional product and conversion copywriting"
+      },
+      {
+        "id": "growth_marketing",
+        "description": "Professional growth marketing and campaign experimentation"
+      }
+    ],
+    "duration_minutes": 150,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
+  },
+  {
+    "id": "launch-rehearsal",
+    "title": "Rehearse the launch runbook",
+    "description": "Rehearse the launch runbook and rollback procedure.",
+    "required_skills": [
+      {
+        "id": "analytics",
+        "description": "Product analytics and experiment measurement"
+      },
+      {
+        "id": "data_pipeline",
+        "description": "Building and operating production data pipelines"
+      }
+    ],
+    "duration_minutes": 120,
+    "earliest_start": "2026-09-21T09:00:00",
+    "latest_end": "2026-09-25T18:00:00"
   }
 ]

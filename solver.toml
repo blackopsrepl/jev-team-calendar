@@ -14,8 +14,8 @@ type = "accepted_count"
 limit = 4
 
 [termination]
-seconds_spent_limit = 8
-unimproved_seconds_spent_limit = 3
+seconds_spent_limit = 12
+unimproved_seconds_spent_limit = 4
 
 # Opt in to bounded candidate-pull diagnostics when needed. Trace detail is
 # retained separately from ordinary status, snapshot, and SSE telemetry.

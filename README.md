@@ -128,9 +128,9 @@ simply reports the hard violation, which is why both demo projects solve to
 ## Project Data
 
 - `input/resumes/` — the shared talent pool (10 resumes; `.md`, `.txt`, `.pdf`).
-- `input/projects/platform-reliability/tasks.json` — 12 infrastructure tasks over
+- `input/projects/platform-reliability/tasks.json` — 30 infrastructure tasks over
   11 skills.
-- `input/projects/product-launch/tasks.json` — 10 launch tasks over a distinct
+- `input/projects/product-launch/tasks.json` — 22 launch tasks over a distinct
   9-skill universe.
 - `fixtures/projects/*/jev_candidates.json` — deterministic, zero-network
   artifacts used by tests and as the fallback.
