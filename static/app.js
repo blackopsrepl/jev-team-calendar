@@ -3,8 +3,8 @@
 (async function () {
   'use strict';
 
-  var SLOT_MINUTES = 60;
-  var DEFAULT_VIEWPORT_SLOTS = 12;
+  var SLOT_MINUTES = 30;
+  var DEFAULT_VIEWPORT_SLOTS = 18;
   var TIMELINE_TONES = ['emerald', 'blue', 'amber', 'rose', 'violet', 'slate'];
 
   var config = await fetch('/sf-config.json').then(function (response) { return response.json(); });
@@ -16,21 +16,19 @@
   var lastAnalysis = null;
   var bootstrapError = null;
   var demoCatalog = { defaultId: null, availableIds: [] };
-  var activeTab = (uiModel.views && uiModel.views.length) ? uiModel.views[0].id : 'overview';
+  var currentProject = null;
+  var activeTab = 'overview';
   var viewPanels = {};
   var viewTimelines = {};
 
-  var tabs = (uiModel.views || []).map(function (view, index) {
+  var tabs = [{ id: 'overview', label: 'Overview', icon: 'fa-compass', active: true }].concat((uiModel.views || []).map(function (view) {
     return {
       id: view.id,
-      label: view.label,
+      label: view.variableField === 'candidate_idx' ? 'Team calendar' : 'Start-slot audit',
       icon: view.kind === 'list' ? 'fa-list-ol' : 'fa-table-cells-large',
-      active: index === 0,
+      active: false,
     };
-  });
-  if (!tabs.length) {
-    tabs.push({ id: 'overview', label: 'Overview', icon: 'fa-compass', active: true });
-  }
+  }));
   tabs.push({ id: 'data', label: 'Data', icon: 'fa-table' });
   tabs.push({ id: 'api', label: 'REST API', icon: 'fa-book' });
 
@@ -221,19 +219,20 @@
     if (currentPlan) {
       return Promise.resolve(clonePlan(currentPlan));
     }
-    if (!demoCatalog.defaultId) {
+    if (!currentProject) {
       return Promise.reject(new Error('demo data catalog is unavailable'));
     }
-    return fetchDemoPlan(demoCatalog.defaultId);
+    return fetchDemoPlan(currentProject);
   }
 
   function bootstrapDemoData() {
     fetchDemoCatalog()
       .then(function (catalog) {
         demoCatalog = catalog;
+        currentProject = catalog.defaultId;
         clearBootstrapError();
         renderApiGuide();
-        return fetchDemoPlan(catalog.defaultId);
+        return fetchDemoPlan(currentProject);
       })
       .then(function (data) {
         renderAll(data);
@@ -429,30 +428,81 @@
 
   function renderOverview(data) {
     overviewContainer.innerHTML = '';
-    if ((uiModel.views || []).length) {
-      overviewContainer.appendChild(SF.el(
-        'p',
-        null,
-        'The generated views now mount the canonical solverforge-ui timeline surface for every planning variable declared in your project.'
-      ));
-      overviewContainer.appendChild(SF.createTable({
-        columns: ['Active views', 'Constraints', 'Current score'],
-        rows: [[
-          String(uiModel.views.length),
-          String((uiModel.constraints || []).length),
-          String(data.score || '—'),
-        ]],
-      }));
-      return;
-    }
-    overviewContainer.appendChild(SF.el('p', null, 'No planning variables are declared yet. Use `solverforge generate entity`, `generate fact`, and `generate variable` to shape the app.'));
+    var intro = SF.el('section', { className: 'jtc-intro' });
+    intro.appendChild(SF.el('p', { className: 'jtc-kicker' }, 'RESUME-DISCOVERED TEAM'));
+    intro.appendChild(SF.el('h2', null, 'No employee roster. No hand-maintained skill matrix.'));
+    intro.appendChild(SF.el('p', null, 'Choose a project. Jev evaluates the shared resume pool against that project’s required skill universe. SolverForge alone assigns and schedules the qualified people.'));
+
+    var controls = SF.el('div', { className: 'jtc-controls' });
+    var select = SF.el('select', { 'aria-label': 'Project' });
+    demoCatalog.availableIds.forEach(function (projectId) {
+      var option = SF.el('option', { value: projectId }, title(projectId));
+      option.selected = projectId === currentProject;
+      select.appendChild(option);
+    });
+    select.addEventListener('change', function () {
+      currentProject = select.value;
+      fetchDemoPlan(currentProject).then(renderAll).catch(reportBootstrapError);
+    });
+    var ingest = SF.el('button', { type: 'button', className: 'jtc-ingest' }, 'Analyze resumes for this project');
+    ingest.addEventListener('click', function () {
+      ingest.disabled = true;
+      ingest.textContent = 'Jev is evaluating resumes…';
+      fetch('/projects/' + encodeURIComponent(currentProject) + '/ingest', { method: 'POST' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('resume ingestion returned HTTP ' + response.status);
+          return response.json();
+        })
+        .then(function () { return fetchDemoPlan(currentProject); })
+        .then(function (plan) {
+          renderAll(plan);
+          SF.showToast('Candidate facts rebuilt from the resume directory.', { tone: 'success' });
+        })
+        .catch(function (error) { SF.showError(describeError(error)); })
+        .finally(function () {
+          ingest.disabled = false;
+          ingest.textContent = 'Analyze resumes for this project';
+        });
+    });
+    controls.appendChild(select);
+    controls.appendChild(ingest);
+    intro.appendChild(controls);
+    overviewContainer.appendChild(intro);
+
+    overviewContainer.appendChild(SF.createTable({
+      columns: ['Project', 'Resumes evaluated', 'Project tasks', 'Solver constraints', 'Current score'],
+      rows: [[title(currentProject), String((data.candidates || []).length), String((data.tasks || []).length), String((uiModel.constraints || []).length), formatScore(data.score)]],
+    }));
+
+    overviewContainer.appendChild(SF.el('h3', null, 'Discovered candidates and qualified skills'));
+    overviewContainer.appendChild(SF.createTable({
+      columns: ['Candidate', 'Qualified skills', 'Resume source'],
+      rows: (data.candidates || []).map(function (candidate) {
+        return [candidate.display_name, (candidate.qualified_skills || []).join(', ') || 'No project skills above threshold', candidate.resume_source];
+      }),
+    }));
+
+    overviewContainer.appendChild(SF.el('h3', null, 'Project work and required skills'));
+    overviewContainer.appendChild(SF.createTable({
+      columns: ['Task', 'Required skills', 'Duration'],
+      rows: (data.tasks || []).map(function (task) {
+        return [task.title, (task.required_skills || []).join(', '), String(task.duration_slots * 30) + ' min'];
+      }),
+    }));
   }
 
   function renderViews(data) {
     (uiModel.views || []).forEach(function (view) {
       var container = document.getElementById('view-' + view.id);
       if (!container) return;
-      if (view.kind === 'list') {
+      if (view.variableField === 'candidate_idx') {
+        renderTimelinePanel(
+          container,
+          view.id,
+          buildTeamCalendarPayload(data, view),
+          'No resume-discovered candidates or project tasks are available.'
+        );
+      } else if (view.kind === 'list') {
         renderTimelinePanel(
           container,
           view.id,
@@ -468,6 +518,66 @@
         );
       }
     });
+  }
+
+  function buildTeamCalendarPayload(data, view) {
+    var candidates = data.candidates || [];
+    var tasks = data.tasks || [];
+    if (!candidates.length || !tasks.length) return null;
+    var weekdays = ['Mon 21', 'Tue 22', 'Wed 23', 'Thu 24', 'Fri 25'];
+    var days = weekdays.map(function (label, index) {
+      return { id: 'day-' + index, label: label, subLabel: '09:00–18:00', startMinute: index * 1440 + 540, endMinute: index * 1440 + 1080 };
+    });
+    var ticks = [];
+    for (var slot = 0; slot <= 90; slot += 2) {
+      var daySlot = slot % 18;
+      ticks.push({ id: 'calendar-tick-' + slot, minute: calendarMinute(slot), label: String(9 + Math.floor(daySlot / 2)).padStart(2, '0') + ':00' });
+    }
+    var lanes = candidates.map(function (candidate, candidateIndex) {
+      var assigned = tasks.filter(function (task) { return task.candidate_idx === candidateIndex; });
+      return {
+        id: 'candidate-' + candidate.id,
+        label: candidate.display_name,
+        mode: 'detailed',
+        badges: (candidate.qualified_skills || []).slice(0, 3),
+        stats: [{ label: 'Tasks', value: assigned.length }],
+        items: assigned.map(function (task) {
+          return {
+            id: 'task-' + task.id,
+            startMinute: calendarMinute(task.start_slot),
+            endMinute: calendarMinute(task.start_slot + task.duration_slots),
+            label: task.title,
+            meta: (task.required_skills || []).join(' · '),
+            tone: toneForKey(task.id),
+          };
+        }),
+      };
+    });
+    var unassigned = tasks.filter(function (task) { return task.candidate_idx == null || task.start_slot == null; });
+    if (unassigned.length) {
+      lanes.push({
+        id: 'candidate-unassigned', label: 'Unassigned', mode: 'detailed', badges: ['Needs solving'],
+        stats: [{ label: 'Tasks', value: unassigned.length }],
+        items: unassigned.map(function (task, index) {
+          return { id: 'unassigned-' + task.id, startMinute: calendarMinute(index), endMinute: calendarMinute(index + 1), label: task.title, meta: (task.required_skills || []).join(' · '), tone: 'slate' };
+        }),
+      });
+    }
+    return {
+      summary: buildSummarySection(['Project', 'Resume pool', 'Tasks', 'Assigned'], [title(currentProject), String(candidates.length), String(tasks.length), String(tasks.length - unassigned.length)]),
+      timeline: {
+        label: 'Candidate', labelWidth: 300, title: 'Optimized team calendar',
+        subtitle: '30-minute slots · Monday–Friday · assignments made only by SolverForge',
+        model: { axis: { startMinute: 540, endMinute: 6840, days: days, ticks: ticks, initialViewport: { startMinute: 540, endMinute: 2520 } }, lanes: lanes },
+      },
+    };
+  }
+
+  function calendarMinute(slot) {
+    if (slot >= 90) return 4 * 1440 + 1080;
+    var day = Math.floor(slot / 18);
+    var withinDay = slot % 18;
+    return day * 1440 + 540 + withinDay * 30;
   }
 
   function renderTimelinePanel(container, viewId, payload, emptyMessage) {
@@ -829,5 +939,13 @@
     return String(text || '')
       .replace(/_/g, ' ')
       .replace(/\b\w/g, function (match) { return match.toUpperCase(); });
+  }
+
+  function formatScore(score) {
+    if (score == null) return 'Not solved';
+    if (typeof score === 'object' && Number.isInteger(score.hard) && Number.isInteger(score.soft)) {
+      return String(score.hard) + 'hard/' + String(score.soft) + 'soft';
+    }
+    return String(score);
   }
 })();
