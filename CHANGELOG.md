@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.1](https://github.com/blackopsrepl/jev-team-calendar/compare/v0.1.0...v0.1.1) (2026-09-18)
+
+
+### Bug Fixes
+
+* **api:** use as_chunks for the digest hex parser ([b50204f](https://github.com/blackopsrepl/jev-team-calendar/commit/b50204f60d6bafc9524bc494aa48215a82b55af4))
+
 ## 0.1.0 (2026-09-18)
 
 

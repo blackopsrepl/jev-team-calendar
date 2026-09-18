@@ -118,7 +118,7 @@ wheels = [
 
 [[package]]
 name = "jev-team-calendar-tools"
-version = "0.1.0"
+version = "0.1.1"
 source = { virtual = "." }
 dependencies = [
     { name = "typesafe-sdk" },
