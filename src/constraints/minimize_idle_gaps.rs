@@ -16,9 +16,6 @@ fn candidate_idx_join_key(entity: &Task) -> Option<usize> {
 }
 
 fn pair_weight(left: &Task, right: &Task) -> HardSoftScore {
-    if left.id >= right.id {
-        return <HardSoftScore as Score>::zero();
-    }
     let gap = match (
         left.start_slot,
         left.end_slot(),

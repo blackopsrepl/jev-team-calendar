@@ -136,6 +136,30 @@ mod tests {
     }
 
     #[test]
+    fn same_candidate_overlap_is_detected_regardless_of_id_order() {
+        let plan = Plan::new(
+            vec![candidate("alice", &[])],
+            vec![task("zulu", &[], 0, 4), task("alpha", &[], 2, 4)],
+        );
+        assert_eq!(
+            (no_candidate_overlap::constraint(),).evaluate_all(&plan),
+            HardSoftScore::of_hard(-1)
+        );
+    }
+
+    #[test]
+    fn same_day_idle_gap_is_counted_regardless_of_id_order() {
+        let plan = Plan::new(
+            vec![candidate("alice", &[])],
+            vec![task("zulu", &[], 0, 4), task("alpha", &[], 6, 4)],
+        );
+        assert_eq!(
+            (minimize_idle_gaps::constraint(),).evaluate_all(&plan),
+            HardSoftScore::of_soft(-2)
+        );
+    }
+
+    #[test]
     fn task_windows_are_enforced() {
         let mut outside = task("outside", &[], 2, 4);
         outside.earliest_start_slot = 4;

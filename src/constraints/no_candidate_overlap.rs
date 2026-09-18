@@ -16,9 +16,6 @@ fn candidate_idx_join_key(entity: &Task) -> Option<usize> {
 }
 
 fn pair_condition(left: &Task, right: &Task) -> bool {
-    if left.id >= right.id {
-        return false;
-    }
     match (
         left.start_slot,
         left.end_slot(),
