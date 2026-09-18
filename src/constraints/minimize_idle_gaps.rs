@@ -24,11 +24,9 @@ fn pair_weight(left: &Task, right: &Task) -> HardSoftScore {
     ) {
         (Some(ls), Some(le), Some(rs), Some(re)) if ls / 18 == rs / 18 => {
             if le <= rs {
-                rs - le
-            } else if re <= ls {
-                ls - re
+                rs.saturating_sub(le)
             } else {
-                0
+                ls.saturating_sub(re)
             }
         }
         _ => 0,

@@ -19,6 +19,7 @@ pub struct Candidate {
 }
 
 impl Candidate {
+    #[allow(clippy::too_many_arguments)]
     pub fn new(id: impl Into<String>, name: impl Into<String>, index: usize, display_name: String, qualified_skills: Vec<String>, evaluated_skills: Vec<String>, skill_probabilities_ppm: Vec<u32>, availability: Vec<bool>, resume_source: String) -> Self {
         Self { id: id.into(), name: name.into(), index, display_name, qualified_skills, evaluated_skills, skill_probabilities_ppm, availability, resume_source }
     }
