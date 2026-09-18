@@ -489,12 +489,7 @@
       var container = document.getElementById('view-' + view.id);
       if (!container) return;
       if (view.variableField === 'candidate_idx') {
-        renderTimelinePanel(
-          container,
-          view.id,
-          buildTeamCalendarPayload(data, view),
-          'No resume-discovered candidates or project tasks are available.'
-        );
+        renderSchedulerPanel(container, data);
       } else if (view.kind === 'list') {
         renderTimelinePanel(
           container,
@@ -513,64 +508,162 @@
     });
   }
 
-  function buildTeamCalendarPayload(data, view) {
+  var SCHEDULER_DAYS = ['Mon 21', 'Tue 22', 'Wed 23', 'Thu 24', 'Fri 25'];
+  var SCHEDULER_SLOTS_PER_DAY = 18;
+  var SCHEDULER_TONES = ['emerald', 'blue', 'amber', 'red', 'gray'];
+
+  function renderSchedulerPanel(container, data) {
+    container.innerHTML = '';
     var candidates = data.candidates || [];
     var tasks = data.tasks || [];
-    if (!candidates.length || !tasks.length) return null;
-    var weekdays = ['Mon 21', 'Tue 22', 'Wed 23', 'Thu 24', 'Fri 25'];
-    var days = weekdays.map(function (label, index) {
-      return { id: 'day-' + index, label: label, subLabel: '09:00–18:00', startMinute: index * 1440 + 540, endMinute: index * 1440 + 1080 };
-    });
-    var ticks = [];
-    for (var slot = 0; slot <= 90; slot += 2) {
-      var daySlot = slot % 18;
-      ticks.push({ id: 'calendar-tick-' + slot, minute: calendarMinute(slot), label: String(9 + Math.floor(daySlot / 2)).padStart(2, '0') + ':00' });
+    if (!candidates.length || !tasks.length) {
+      container.appendChild(SF.el('p', null, 'No resume-discovered candidates or project tasks are available.'));
+      return;
     }
-    var lanes = candidates.map(function (candidate, candidateIndex) {
-      var assigned = tasks.filter(function (task) { return task.candidate_idx === candidateIndex; });
-      return {
-        id: 'candidate-' + candidate.id,
-        label: candidate.display_name,
-        mode: 'detailed',
-        badges: (candidate.qualified_skills || []).slice(0, 3),
-        stats: [{ label: 'Tasks', value: assigned.length }],
-        items: assigned.map(function (task) {
-          return {
-            id: 'task-' + task.id,
-            startMinute: calendarMinute(task.start_slot),
-            endMinute: calendarMinute(task.start_slot + task.duration_slots),
-            label: task.title,
-            meta: (task.required_skills || []).join(' · '),
-            tone: toneForKey(task.id),
-          };
-        }),
-      };
+    var unassigned = tasks.filter(function (task) {
+      return task.candidate_idx == null || task.start_slot == null;
     });
-    var unassigned = tasks.filter(function (task) { return task.candidate_idx == null || task.start_slot == null; });
-    if (unassigned.length) {
-      lanes.push({
-        id: 'candidate-unassigned', label: 'Unassigned', mode: 'detailed', badges: ['Needs solving'],
-        stats: [{ label: 'Tasks', value: unassigned.length }],
-        items: unassigned.map(function (task, index) {
-          return { id: 'unassigned-' + task.id, startMinute: calendarMinute(index), endMinute: calendarMinute(index + 1), label: task.title, meta: (task.required_skills || []).join(' · '), tone: 'slate' };
-        }),
-      });
-    }
-    return {
-      summary: buildSummarySection(['Project', 'Resume pool', 'Tasks', 'Assigned'], [title(currentProject), String(candidates.length), String(tasks.length), String(tasks.length - unassigned.length)]),
-      timeline: {
-        label: 'Candidate', labelWidth: 300, title: 'Optimized team calendar',
-        subtitle: '30-minute slots · Monday–Friday · assignments made only by SolverForge',
-        model: { axis: { startMinute: 540, endMinute: 6840, days: days, ticks: ticks, initialViewport: { startMinute: 540, endMinute: 2520 } }, lanes: lanes },
-      },
-    };
+    container.appendChild(buildSummarySection(
+      ['Project', 'Resume pool', 'Tasks', 'Assigned'],
+      [title(currentProject), String(candidates.length), String(tasks.length), String(tasks.length - unassigned.length)]
+    ));
+    container.appendChild(buildSchedulerGrid(candidates, tasks, unassigned));
   }
 
-  function calendarMinute(slot) {
-    if (slot >= 90) return 4 * 1440 + 1080;
-    var day = Math.floor(slot / 18);
-    var withinDay = slot % 18;
-    return day * 1440 + 540 + withinDay * 30;
+  function buildSchedulerGrid(candidates, tasks, unassigned) {
+    var wrap = SF.el('div', { className: 'jtc-scheduler' });
+    var grid = SF.el('div', { className: 'jtc-scheduler-grid' });
+    grid.style.setProperty('--jtc-days', String(SCHEDULER_DAYS.length));
+    wrap.appendChild(grid);
+
+    grid.appendChild(SF.el('div', { className: 'jtc-scheduler-corner' }, 'Candidate'));
+    SCHEDULER_DAYS.forEach(function (label) {
+      var head = SF.el('div', { className: 'jtc-scheduler-day' });
+      head.appendChild(SF.el('strong', null, label));
+      head.appendChild(SF.el('span', null, '09:00–18:00'));
+      grid.appendChild(head);
+    });
+
+    grid.appendChild(SF.el('div', { className: 'jtc-scheduler-ruler-corner' }));
+    SCHEDULER_DAYS.forEach(function (_label, dayIndex) {
+      grid.appendChild(buildSchedulerRuler(dayIndex === SCHEDULER_DAYS.length - 1));
+    });
+
+    candidates.forEach(function (candidate, candidateIndex) {
+      var assigned = tasks.filter(function (task) {
+        return task.candidate_idx === candidateIndex && task.start_slot != null;
+      });
+      grid.appendChild(buildSchedulerLaneLabel(
+        candidate.display_name,
+        (candidate.qualified_skills || []).slice(0, 3),
+        assigned.length
+      ));
+      for (var day = 0; day < SCHEDULER_DAYS.length; day += 1) {
+        var cell = SF.el('div', { className: 'jtc-day-cell' });
+        assigned.forEach(function (task) {
+          if (Math.floor(task.start_slot / SCHEDULER_SLOTS_PER_DAY) === day) {
+            cell.appendChild(buildTaskBlock(task, task.start_slot % SCHEDULER_SLOTS_PER_DAY));
+          }
+        });
+        grid.appendChild(cell);
+      }
+    });
+
+    if (unassigned.length) {
+      grid.appendChild(buildSchedulerLaneLabel('Unassigned', ['Needs solving'], unassigned.length));
+      var cells = [];
+      for (var dayIndex = 0; dayIndex < SCHEDULER_DAYS.length; dayIndex += 1) {
+        var unassignedCell = SF.el('div', { className: 'jtc-day-cell' });
+        cells.push(unassignedCell);
+        grid.appendChild(unassignedCell);
+      }
+      var cursor = 0;
+      unassigned.forEach(function (task) {
+        var duration = Math.max(task.duration_slots, 1);
+        var day = Math.floor(cursor / SCHEDULER_SLOTS_PER_DAY);
+        var within = cursor % SCHEDULER_SLOTS_PER_DAY;
+        if (within + duration > SCHEDULER_SLOTS_PER_DAY) {
+          day += 1;
+          within = 0;
+          cursor = day * SCHEDULER_SLOTS_PER_DAY;
+        }
+        if (day < cells.length) {
+          cells[day].appendChild(buildTaskBlock(task, within));
+        }
+        cursor += duration;
+      });
+    }
+
+    return wrap;
+  }
+
+  function buildSchedulerLaneLabel(name, badges, count) {
+    var label = SF.el('div', { className: 'jtc-lane-label' });
+    label.appendChild(SF.el('div', { className: 'jtc-lane-name' }, name));
+    if (badges && badges.length) {
+      var badgeRow = SF.el('div', { className: 'jtc-lane-badges' });
+      badges.forEach(function (badge) {
+        badgeRow.appendChild(SF.el('span', { className: 'jtc-lane-badge' }, badge));
+      });
+      label.appendChild(badgeRow);
+    }
+    label.appendChild(SF.el('div', { className: 'jtc-lane-stat' }, String(count) + (count === 1 ? ' task' : ' tasks')));
+    return label;
+  }
+
+  function buildSchedulerRuler(showEnd) {
+    var ruler = SF.el('div', { className: 'jtc-scheduler-ruler' });
+    var ticks = [
+      { clock: '09:00', pct: 0 },
+      { clock: '12:00', pct: 100 / 3 },
+      { clock: '15:00', pct: 200 / 3 }
+    ];
+    if (showEnd) ticks.push({ clock: '18:00', pct: 100 });
+    ticks.forEach(function (entry, index) {
+      var tick = SF.el('span', null, entry.clock);
+      tick.style.left = String(entry.pct) + '%';
+      tick.style.transform = index === 0
+        ? 'none'
+        : (entry.pct === 100 ? 'translateX(-100%)' : 'translateX(-50%)');
+      ruler.appendChild(tick);
+    });
+    return ruler;
+  }
+
+  function buildTaskBlock(task, withinDaySlot) {
+    var left = (withinDaySlot / SCHEDULER_SLOTS_PER_DAY) * 100;
+    var width = Math.max((task.duration_slots / SCHEDULER_SLOTS_PER_DAY) * 100, 3);
+    var tone = SCHEDULER_TONES[schedulerToneIndex(task.id)];
+    var block = SF.el('div', { className: 'jtc-task jtc-task--' + tone });
+    block.style.left = left + '%';
+    block.style.width = width + '%';
+    block.title = task.title + ' — ' + schedulerTimeRange(task, withinDaySlot)
+      + (task.required_skills && task.required_skills.length ? ' — ' + task.required_skills.join(', ') : '');
+    block.appendChild(SF.el('div', { className: 'jtc-task-title' }, task.title));
+    if (task.required_skills && task.required_skills.length) {
+      block.appendChild(SF.el('div', { className: 'jtc-task-meta' }, task.required_skills.join(' · ')));
+    }
+    return block;
+  }
+
+  function schedulerTimeRange(task, withinDaySlot) {
+    return schedulerClock(withinDaySlot) + '–' + schedulerClock(withinDaySlot + task.duration_slots);
+  }
+
+  function schedulerClock(withinDaySlot) {
+    var minutes = 9 * 60 + withinDaySlot * SLOT_MINUTES;
+    var hours = Math.floor(minutes / 60);
+    var mins = minutes % 60;
+    return (hours < 10 ? '0' : '') + hours + ':' + (mins < 10 ? '0' : '') + mins;
+  }
+
+  function schedulerToneIndex(key) {
+    var text = String(key || '');
+    var hash = 0;
+    for (var index = 0; index < text.length; index += 1) {
+      hash = ((hash * 31) + text.charCodeAt(index)) >>> 0;
+    }
+    return hash % SCHEDULER_TONES.length;
   }
 
   function renderTimelinePanel(container, viewId, payload, emptyMessage) {
@@ -700,6 +793,7 @@
         title: view.label,
         subtitle: title(view.entityPlural) + ' grouped by '
           + (usesCountableRange ? 'value' : title(view.sourcePlural)),
+        zoomPresets: [],
         model: {
           axis: axis,
           lanes: lanes,

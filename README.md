@@ -160,8 +160,9 @@ The shell is the standard `solverforge-ui` application, extended with:
 - a **project selector** and an **Analyze resumes** action;
 - a **discovered candidates** table showing qualified skills and resume source;
 - a **project work** table of tasks and required skills;
-- a **team calendar** timeline that renders each SolverForge assignment on the
-  correct weekday and wall-clock time;
+- a **team calendar** grid of adjacent working-hour day columns (Mon–Fri,
+  09:00–18:00) that places each SolverForge assignment at its real weekday and
+  wall-clock time;
 - the retained `/jobs` lifecycle, status, score analysis, snapshot, SSE, and raw
   Data views.
 

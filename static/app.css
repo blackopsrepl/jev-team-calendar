@@ -43,7 +43,192 @@
   opacity: 0.65;
 }
 
+#sf-app .sf-rail-timeline-toolbar {
+  display: none;
+}
+
+.jtc-scheduler {
+  margin-top: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--sf-gray-100, #f3f4f6);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.jtc-scheduler-grid {
+  display: grid;
+  grid-template-columns: 220px repeat(var(--jtc-days, 5), minmax(150px, 1fr));
+  min-width: 860px;
+}
+
+.jtc-scheduler-corner,
+.jtc-scheduler-ruler-corner,
+.jtc-lane-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  background: #fff;
+  border-right: 1px solid var(--sf-gray-100, #f3f4f6);
+}
+
+.jtc-scheduler-corner {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 12px;
+  color: var(--sf-gray-500, #6b7280);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.jtc-scheduler-day {
+  padding: 10px 12px 8px;
+  border-left: 1px solid var(--sf-gray-100, #f3f4f6);
+  background: #fafafa;
+}
+
+.jtc-scheduler-day strong {
+  display: block;
+  font-size: 0.82rem;
+}
+
+.jtc-scheduler-day span {
+  color: var(--sf-gray-500, #6b7280);
+  font-size: 0.7rem;
+}
+
+.jtc-scheduler-ruler-corner,
+.jtc-scheduler-ruler {
+  height: 18px;
+}
+
+.jtc-scheduler-ruler {
+  position: relative;
+  border-left: 1px solid var(--sf-gray-100, #f3f4f6);
+}
+
+.jtc-scheduler-ruler span {
+  position: absolute;
+  top: 2px;
+  color: var(--sf-gray-500, #6b7280);
+  font-size: 0.62rem;
+  white-space: nowrap;
+}
+
+.jtc-lane-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--sf-gray-100, #f3f4f6);
+}
+
+.jtc-lane-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.jtc-lane-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.jtc-lane-badge {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--sf-emerald-50, #ecfdf5);
+  color: var(--sf-emerald-700, #047857);
+  font-size: 0.62rem;
+  font-weight: 600;
+}
+
+.jtc-lane-stat {
+  color: var(--sf-gray-500, #6b7280);
+  font-size: 0.68rem;
+}
+
+.jtc-day-cell {
+  position: relative;
+  min-height: 54px;
+  border-top: 1px solid var(--sf-gray-100, #f3f4f6);
+  border-left: 1px solid var(--sf-gray-100, #f3f4f6);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--sf-gray-100, #f3f4f6) 0,
+    var(--sf-gray-100, #f3f4f6) 1px,
+    transparent 1px,
+    transparent 11.111%
+  );
+}
+
+.jtc-task {
+  position: absolute;
+  top: 7px;
+  bottom: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  padding: 3px 7px;
+  border-left: 3px solid var(--jtc-task-border, #6b7280);
+  border-radius: 6px;
+  background: var(--jtc-task-bg, #f3f4f6);
+  color: var(--jtc-task-text, #374151);
+  font-size: 0.7rem;
+  line-height: 1.2;
+}
+
+.jtc-task-title,
+.jtc-task-meta {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.jtc-task-title {
+  font-weight: 600;
+}
+
+.jtc-task-meta {
+  font-size: 0.64rem;
+  opacity: 0.75;
+}
+
+.jtc-task--emerald {
+  --jtc-task-bg: var(--sf-emerald-50, #ecfdf5);
+  --jtc-task-border: var(--sf-emerald-700, #047857);
+  --jtc-task-text: var(--sf-emerald-700, #047857);
+}
+
+.jtc-task--blue {
+  --jtc-task-bg: var(--sf-blue-50, #eff6ff);
+  --jtc-task-border: var(--sf-blue-700, #1d4ed8);
+  --jtc-task-text: var(--sf-blue-700, #1d4ed8);
+}
+
+.jtc-task--amber {
+  --jtc-task-bg: var(--sf-amber-50, #fffbeb);
+  --jtc-task-border: var(--sf-amber-700, #b45309);
+  --jtc-task-text: var(--sf-amber-700, #b45309);
+}
+
+.jtc-task--red {
+  --jtc-task-bg: var(--sf-red-50, #fef2f2);
+  --jtc-task-border: var(--sf-red-700, #b91c1c);
+  --jtc-task-text: var(--sf-red-700, #b91c1c);
+}
+
+.jtc-task--gray {
+  --jtc-task-bg: var(--sf-gray-50, #f9fafb);
+  --jtc-task-border: var(--sf-gray-700, #374151);
+  --jtc-task-text: var(--sf-gray-700, #374151);
+}
+
 @media (max-width: 640px) {
   .jtc-intro { padding: 20px; }
   .jtc-controls > * { width: 100%; }
+  .jtc-scheduler-grid { grid-template-columns: 150px repeat(var(--jtc-days, 5), minmax(150px, 1fr)); }
 }
