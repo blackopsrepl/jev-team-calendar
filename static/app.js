@@ -429,9 +429,7 @@
   function renderOverview(data) {
     overviewContainer.innerHTML = '';
     var intro = SF.el('section', { className: 'jtc-intro' });
-    intro.appendChild(SF.el('p', { className: 'jtc-kicker' }, 'RESUME-DISCOVERED TEAM'));
-    intro.appendChild(SF.el('h2', null, 'No employee roster. No hand-maintained skill matrix.'));
-    intro.appendChild(SF.el('p', null, 'Choose a project. Jev evaluates the shared resume pool against that project’s required skill universe. SolverForge alone assigns and schedules the qualified people.'));
+    intro.appendChild(SF.el('h2', null, 'Project team calendar'));
 
     var controls = SF.el('div', { className: 'jtc-controls' });
     var select = SF.el('select', { 'aria-label': 'Project' });
@@ -468,11 +466,6 @@
     controls.appendChild(ingest);
     intro.appendChild(controls);
     overviewContainer.appendChild(intro);
-
-    overviewContainer.appendChild(SF.createTable({
-      columns: ['Project', 'Resumes evaluated', 'Project tasks', 'Solver constraints', 'Current score'],
-      rows: [[title(currentProject), String((data.candidates || []).length), String((data.tasks || []).length), String((uiModel.constraints || []).length), formatScore(data.score)]],
-    }));
 
     overviewContainer.appendChild(SF.el('h3', null, 'Discovered candidates and qualified skills'));
     overviewContainer.appendChild(SF.createTable({
@@ -941,11 +934,4 @@
       .replace(/\b\w/g, function (match) { return match.toUpperCase(); });
   }
 
-  function formatScore(score) {
-    if (score == null) return 'Not solved';
-    if (typeof score === 'object' && Number.isInteger(score.hard) && Number.isInteger(score.soft)) {
-      return String(score.hard) + 'hard/' + String(score.soft) + 'soft';
-    }
-    return String(score);
-  }
 })();

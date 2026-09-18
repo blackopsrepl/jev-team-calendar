@@ -13,18 +13,6 @@
   line-height: 1.08;
 }
 
-.jtc-intro p {
-  max-width: 820px;
-}
-
-.jtc-kicker {
-  margin: 0;
-  color: #25634c;
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
 .jtc-controls {
   display: flex;
   flex-wrap: wrap;

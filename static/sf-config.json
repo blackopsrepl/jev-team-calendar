@@ -1,6 +1,6 @@
 {
   "title": "Jev Team Calendar",
-  "subtitle": "Project skills from resumes. Scheduling by SolverForge.",
+  "subtitle": "Build a qualified project team and delivery plan.",
   "constraints": [
     "complete_candidate",
     "complete_start",
